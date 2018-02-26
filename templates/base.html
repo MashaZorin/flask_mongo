@@ -3,8 +3,13 @@
   <head>
     <title> Zoo wee mama </title>
   </head>
+
   <body>
-    <p> Find American Movies from a specific director: e.g. Christopher Nolan </p>
+    {% set messages = get_flashed_messages() %}
+    {% for each in messages %}
+        <h6> {{each}} </h6>
+    {% endfor %}
+    <p> Find a random American movie from a specific director: e.g. Christopher Nolan </p>
     <form method = "POST" action = "/answer">
       <input type = "text" name = "director">
       <input type = "submit">
