@@ -13,6 +13,12 @@ movies = client["movies"]
 r = requests.get("https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json")
 data = r.json()
 
+print "Adding movies to db... (will take a while)"
+
+for doc in data:
+    movies.insert_one(doc)
+
+print "Added movies"
 
 @mongo_app.route('/')
 def root():
@@ -28,13 +34,6 @@ def answer():
     flash(random.choice(L))
     return render_template("base.html")
 
-print "Adding movies to db... (will take a while)"
-
-for doc in data:
-    movies.insert_one(doc)
-
-print "Added movies"
-
 
 if __name__ == "__main__":
-    mongo_app.run(debug = True)
+    mongo_app.run(debug = True, use_reloader=False)
