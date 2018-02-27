@@ -1,8 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash
-import pymongo, requests, random
+import pymongo, requests, random, os
+
 
 
 mongo_app = Flask(__name__)
+mongo_app.secret_key = os.urandom(64)
 
 connection = pymongo.MongoClient("homer.stuy.edu")
 connection.drop_database("freudenbergJ-zorinM")
